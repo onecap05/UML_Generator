@@ -1,0 +1,132 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "name": "Ciclo de un pedido",
+    "createdAt": "2026-11-16T02:31:30.192Z",
+    "updatedAt": "2026-11-16T02:31:30.192Z"
+  },
+  "nodes": [
+    {
+      "id": "node-be65554c-37ae-4130-b0d7-cccbbd776a59",
+      "type": "initial",
+      "name": "Inicial 1",
+      "x": 70,
+      "y": 247,
+      "width": 26,
+      "height": 26,
+      "parentId": null,
+      "entry": "",
+      "do": "",
+      "exit": "",
+      "orientation": "horizontal"
+    },
+    {
+      "id": "node-b47011ab-24c3-4f1e-bb2a-b8a96bacad9c",
+      "type": "state",
+      "name": "Pendiente",
+      "x": 160,
+      "y": 210,
+      "width": 170,
+      "height": 100,
+      "parentId": null,
+      "entry": "crearPedido()",
+      "do": "esperarPago()",
+      "exit": "",
+      "orientation": "horizontal"
+    },
+    {
+      "id": "node-ad2d4bbb-14ef-4150-96bf-5cfc0317d6cb",
+      "type": "state",
+      "name": "Pagado",
+      "x": 420,
+      "y": 210,
+      "width": 170,
+      "height": 100,
+      "parentId": null,
+      "entry": "registrarPago()",
+      "do": "",
+      "exit": "emitirFactura()",
+      "orientation": "horizontal"
+    },
+    {
+      "id": "node-c8e48fca-1cf4-430e-8a04-73a56874cf1f",
+      "type": "state",
+      "name": "Enviado",
+      "x": 700,
+      "y": 210,
+      "width": 170,
+      "height": 100,
+      "parentId": null,
+      "entry": "notificarCliente()",
+      "do": "",
+      "exit": "",
+      "orientation": "horizontal"
+    },
+    {
+      "id": "node-9fc9c83c-d34c-4f88-b622-b0cfce97facd",
+      "type": "final",
+      "name": "Final 1",
+      "x": 970,
+      "y": 243,
+      "width": 34,
+      "height": 34,
+      "parentId": null,
+      "entry": "",
+      "do": "",
+      "exit": "",
+      "orientation": "horizontal"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "transition-40f5ef40-db32-4eb3-ba4d-e54be5f04cbf",
+      "sourceId": "node-be65554c-37ae-4130-b0d7-cccbbd776a59",
+      "targetId": "node-b47011ab-24c3-4f1e-bb2a-b8a96bacad9c",
+      "event": "",
+      "guard": "",
+      "action": "",
+      "controlPoints": []
+    },
+    {
+      "id": "transition-315263b7-2f59-4775-8dd4-caa715f14051",
+      "sourceId": "node-b47011ab-24c3-4f1e-bb2a-b8a96bacad9c",
+      "targetId": "node-ad2d4bbb-14ef-4150-96bf-5cfc0317d6cb",
+      "event": "pagar",
+      "guard": "saldo >= total",
+      "action": "confirmarPago()",
+      "controlPoints": []
+    },
+    {
+      "id": "transition-905eaf62-4bae-469c-8eed-75b1b2a7345e",
+      "sourceId": "node-ad2d4bbb-14ef-4150-96bf-5cfc0317d6cb",
+      "targetId": "node-c8e48fca-1cf4-430e-8a04-73a56874cf1f",
+      "event": "despachar",
+      "guard": "stock disponible",
+      "action": "prepararEnvío()",
+      "controlPoints": []
+    },
+    {
+      "id": "transition-edee91dc-5f6b-4d35-8a58-70c1de5c269e",
+      "sourceId": "node-c8e48fca-1cf4-430e-8a04-73a56874cf1f",
+      "targetId": "node-9fc9c83c-d34c-4f88-b622-b0cfce97facd",
+      "event": "entregar",
+      "guard": "",
+      "action": "",
+      "controlPoints": []
+    },
+    {
+      "id": "transition-86e72c44-1758-4591-919e-92377ea04906",
+      "sourceId": "node-b47011ab-24c3-4f1e-bb2a-b8a96bacad9c",
+      "targetId": "node-b47011ab-24c3-4f1e-bb2a-b8a96bacad9c",
+      "event": "reintentar",
+      "guard": "",
+      "action": "actualizarPago()",
+      "controlPoints": []
+    }
+  ],
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

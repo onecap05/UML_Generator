@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182c40">
+  <title>UML State Machine Designer</title>
+  <link rel="stylesheet" href="src/css/app.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="3" width="13" height="10" rx="3"/><rect x="17" y="20" width="13" height="10" rx="3"/><path d="M9 13v12h8m-4-4 4 4-4 4"/></svg><div>State Machine <span>DESIGNER · UML 2.x</span></div></div>
+    <span class="local-badge"><i></i> Espacio local</span>
+  </header>
+  <nav class="toolbar" aria-label="Herramientas del diagrama">
+    <div class="tool-group" id="file-tools"></div>
+    <div class="tool-group" id="history-tools"></div>
+    <div class="tool-group" id="export-tools"></div>
+    <div class="tool-group zoom-tools" id="zoom-tools"></div>
+  </nav>
+  <main class="workspace">
+    <aside class="palette-panel" aria-label="Paleta de componentes">
+      <div class="panel-heading"><h2>Componentes</h2><span>UML</span></div>
+      <p class="panel-hint">Arrastra un elemento al lienzo o selecciónalo y haz clic.</p>
+      <div id="palette"></div>
+      <div class="palette-options"><label><input id="snap" type="checkbox" checked> Ajustar a cuadrícula</label><label><input id="grid" type="checkbox" checked> Mostrar cuadrícula</label></div>
+      <div class="palette-note"><strong>Conecta tus estados</strong><p>Selecciona un estado y arrastra desde uno de sus puntos azules hasta el destino.</p><p>También puedes usar la herramienta Transición.</p></div>
+      <div class="palette-footer">SVG nativo <span>·</span> Sin conexión</div>
+    </aside>
+    <section class="diagram-panel" aria-label="Editor de máquina de estados">
+      <div class="document-bar"><div><span class="document-icon">◈</span><input id="diagram-name" aria-label="Nombre del diagrama" value="Máquina de estados" maxlength="160"><span id="dirty-indicator" title="Cambios sin guardar" hidden>●</span></div><span class="document-type">Máquina de estados</span></div>
+      <div class="canvas-viewport" id="canvas-viewport" tabindex="0" aria-label="Lienzo del diagrama. Delete para eliminar; Control Z para deshacer.">
+        <svg id="canvas" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de máquina de estados"></svg>
+        <div class="empty-guide" id="empty-guide"><div class="empty-symbol">◉ → ▢ → ◎</div><h1>Todo comienza con un estado</h1><p>Arrastra un componente desde la paleta<br>y da forma al comportamiento de tu sistema.</p><button id="load-example" class="secondary-button">Abrir diagrama de ejemplo</button><span>O empieza con un estado inicial</span></div>
+        <div class="canvas-hint" id="canvas-hint">Seleccionar <kbd>V</kbd><span>Transición <kbd>T</kbd></span><span>Mover vista <kbd>Espacio + arrastrar</kbd></span></div>
+      </div>
+    </section>
+    <aside class="inspector-panel" aria-label="Inspector de propiedades">
+      <div class="panel-heading"><h2>Propiedades</h2><span id="selection-kind">DIAGRAMA</span></div>
+      <div id="properties"></div>
+      <section class="validation-section"><div class="panel-heading"><h2>Validación UML</h2><span id="validation-count">0</span></div><div id="validation-results" aria-live="polite"></div><p class="validation-note">Validación del subconjunto UML compatible. Los diagramas incompletos se pueden guardar.</p></section>
+    </aside>
+  </main>
+  <footer class="statusbar"><span id="status-message" role="status">Listo para diseñar</span><div><span id="selection-status">Sin selección</span><span id="counts">0 estados · 0 transiciones</span><span id="zoom-status">100%</span></div></footer>
+  <input id="file-input" type="file" accept=".json,application/json" hidden>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <div id="context-menu" class="context-menu" role="menu" hidden></div>
+  <script type="module" src="src/js/main.js"></script>
+</body>
+</html>

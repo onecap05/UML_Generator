@@ -1,0 +1,31 @@
+import { mkdir, writeFile } from 'node:fs/promises';
+import { DiagramModel } from '../src/js/core/DiagramModel.js';
+
+await mkdir('examples', { recursive: true });
+const model = new DiagramModel(); model.data.metadata.name = 'Ciclo de un pedido';
+const initial = model.addNode('initial', 70, 247);
+const pending = model.addNode('state', 160, 210); Object.assign(pending, { name: 'Pendiente', entry: 'crearPedido()', do: 'esperarPago()' });
+const paid = model.addNode('state', 420, 210); Object.assign(paid, { name: 'Pagado', entry: 'registrarPago()', exit: 'emitirFactura()' });
+const sent = model.addNode('state', 700, 210); Object.assign(sent, { name: 'Enviado', entry: 'notificarCliente()' });
+const final = model.addNode('final', 970, 243);
+const connect = (a, b, event = '', guard = '', action = '') => Object.assign(model.addTransition(a.id, b.id), { event, guard, action });
+connect(initial, pending); connect(pending, paid, 'pagar', 'saldo >= total', 'confirmarPago()'); connect(paid, sent, 'despachar', 'stock disponible', 'prepararEnvío()'); connect(sent, final, 'entregar'); connect(pending, pending, 'reintentar', '', 'actualizarPago()');
+await writeFile('examples/pedido.json', JSON.stringify(model.data, null, 2));
+
+const advanced = new DiagramModel(); advanced.data.metadata.name = 'Procesamiento compuesto';
+const start = advanced.addNode('initial', 60, 250);
+const parent = advanced.addNode('composite', 180, 120); Object.assign(parent, { name: 'Procesar solicitud', width: 840, height: 420 });
+const inside = advanced.addNode('initial', 220, 300);
+const fork = advanced.addNode('fork', 330, 260); Object.assign(fork, { width: 10, height: 140, orientation: 'vertical' });
+const check = advanced.addNode('state', 410, 200); check.name = 'Verificar datos';
+const reserve = advanced.addNode('state', 410, 370); reserve.name = 'Reservar recursos';
+const join = advanced.addNode('join', 650, 260); Object.assign(join, { width: 10, height: 140, orientation: 'vertical' });
+const choice = advanced.addNode('choice', 735, 300);
+const innerFinal = advanced.addNode('final', 920, 300);
+const rejected = advanced.addNode('state', 735, 420); Object.assign(rejected, { name: 'Revisar solicitud', width: 170, height: 80 });
+const end = advanced.addNode('final', 1110, 260);
+for (const n of advanced.nodes) if (n.id !== parent.id) advanced.assignParent(n.id);
+const edge = (a, b, event = '', guard = '') => Object.assign(advanced.addTransition(a.id, b.id), { event, guard });
+edge(start, parent); edge(inside, fork); edge(fork, check); edge(fork, reserve); edge(check, join, 'verificado'); edge(reserve, join, 'reservado'); edge(join, choice); edge(choice, innerFinal, '', 'válida'); edge(choice, rejected, '', 'else'); edge(rejected, choice, 'revisar'); edge(parent, end, 'completado');
+await writeFile('examples/compuesto.json', JSON.stringify(advanced.data, null, 2));
+console.log('Ejemplos JSON generados.');

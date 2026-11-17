@@ -1,0 +1,230 @@
+.diagram-panel {
+  min-width:0;
+  min-height:0;
+  position:relative;
+  display:flex;
+  flex-direction:column
+}
+
+.document-bar {
+  flex-shrink:0
+}
+
+.canvas-viewport {
+  position:relative;
+  min-height:0;
+  flex:1;
+  overflow:auto;
+  background:#f8fafc;
+  overscroll-behavior:contain;
+  outline-offset:-3px;
+  touch-action:none
+}
+
+.canvas-viewport.panning {
+  cursor:grabbing
+}
+
+.canvas-viewport.connecting {
+  cursor:crosshair
+}
+
+#canvas {
+  display:block;
+  user-select:none;
+  touch-action:none;
+  overflow:visible
+}
+
+.empty-guide {
+  position:absolute;
+  top:44%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  pointer-events:none;
+  width:390px;
+  color:#8593a4
+}
+
+.empty-guide .empty-symbol {
+  font-size:34px;
+  color:#acbcd3;
+  letter-spacing:8px;
+  margin-bottom:23px
+}
+
+.empty-guide h1 {
+  font-size:20px;
+  letter-spacing:-.5px;
+  font-weight:550;
+  color:#50657d;
+  margin-bottom:13px
+}
+
+.empty-guide p {
+  font-size:12px;
+  line-height:1.9
+}
+
+.empty-guide button {
+  pointer-events:auto;
+  margin:24px 0 15px;
+  color:#5277c2;
+  border-color:#d7e1f3
+}
+
+.empty-guide>span {
+  display:block;
+  font-size:10px;
+  color:#a2aeba
+}
+
+.canvas-hint {
+  position:sticky;
+  left:18px;
+  bottom:15px;
+  margin:0 18px 15px;
+  width:max-content;
+  padding:7px 10px;
+  background:#ffffffee;
+  border:1px solid #e5eaf0;
+  border-radius:5px;
+  pointer-events:none;
+  font-size:9px;
+  color:#97a3b1;
+  display:flex;
+  gap:17px
+}
+
+.canvas-hint kbd {
+  margin-left:5px
+}
+
+.node {
+  cursor:move
+}
+
+.node .shape {
+  fill:#fff;
+  stroke:#53677e;
+  stroke-width:1.4
+}
+
+.node[data-type=composite] .shape {
+  fill:#f5f8ff;
+  fill-opacity:.8
+}
+
+.node .solid {
+  fill:#273b50;
+  stroke:#273b50
+}
+
+.node.selected .shape {
+  stroke:#416cda;
+  stroke-width:2
+}
+
+.node .node-title {
+  font-size:13px;
+  font-weight:600;
+  fill:#293f56
+}
+
+.node .node-body {
+  font-size:11px;
+  fill:#67798c
+}
+
+.node .divider {
+  stroke:#dbe2ec;
+  stroke-width:1
+}
+
+.node .composite-label {
+  font-size:9px;
+  fill:#8294af;
+  letter-spacing:1px
+}
+
+.node .selection-box {
+  fill:none;
+  stroke:#6289e3;
+  stroke-width:1;
+  stroke-dasharray:4 3;
+  pointer-events:none
+}
+
+.port {
+  fill:#fff;
+  stroke:#416cda;
+  stroke-width:1.8;
+  cursor:crosshair
+}
+
+.resize-handle {
+  fill:white;
+  stroke:#416cda;
+  stroke-width:1.6;
+  cursor:nwse-resize
+}
+
+.transition .line {
+  fill:none;
+  stroke:#5a6f86;
+  stroke-width:1.5;
+  stroke-linejoin:round
+}
+
+.transition .hit-area {
+  fill:none;
+  stroke:transparent;
+  stroke-width:16;
+  cursor:pointer
+}
+
+.transition.selected .line {
+  stroke:#416cda;
+  stroke-width:2
+}
+
+.transition .transition-label {
+  font-size:11px;
+  fill:#40556f;
+  paint-order:stroke;
+  stroke:#f8fafc;
+  stroke-width:5;
+  stroke-linejoin:round;
+  cursor:pointer
+}
+
+.transition.selected .transition-label {
+  fill:#315fc8
+}
+
+.control-point {
+  fill:#fff;
+  stroke:#416cda;
+  stroke-width:1.5;
+  cursor:move
+}
+
+.connection-preview {
+  fill:none;
+  stroke:#416cda;
+  stroke-width:1.8;
+  stroke-dasharray:6 4;
+  pointer-events:none
+}
+
+.connection-target .shape {
+  stroke:#3c9d7a!important;
+  stroke-width:2.5!important
+}
+
+.node:focus-visible .shape {
+  stroke:#416cda;
+  stroke-width:2
+}
+

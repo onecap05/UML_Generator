@@ -1,0 +1,60 @@
+
+# ==========================================
+# State Machine Designer - Git Ignore
+# ==========================================
+
+# Dependencias
+node_modules/
+bower_components/
+
+# Variables de entorno y archivos sensibles
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Archivos de compilación
+dist/
+build/
+coverage/
+.cache/
+.parcel-cache/
+.vite/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Configuración personal del editor
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de pruebas y reportes
+.nyc_output/
+test-results/
+playwright-report/
+
+# Archivos de respaldo
+*.bak
+*.backup
+*.old
+
+# Archivos locales generados
+*.local
